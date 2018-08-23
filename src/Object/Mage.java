@@ -15,22 +15,21 @@ public class Mage extends Object {
 	
 	//Handler handler;
 	
-	private TexturesLoader  loader;
-	private BufferedImage mageTexturesDown[]=new BufferedImage[4];
-	private BufferedImage mageTexturesUp[]=new BufferedImage[4];
-	private BufferedImage mageTexturesLeft[]=new BufferedImage[4];
-	private BufferedImage mageTexturesRight[]=new BufferedImage[4];
+	private static TexturesLoader  loader=new TexturesLoader("/wizard.png");
+	private static BufferedImage mageTexturesDown[]=new BufferedImage[4];
+	private static BufferedImage mageTexturesUp[]=new BufferedImage[4];
+	private static BufferedImage mageTexturesLeft[]=new BufferedImage[4];
+	private static BufferedImage mageTexturesRight[]=new BufferedImage[4];
 	
-	private Animation animUp, animLeft, animRight, animDown;
+	private static Animation animUp, animLeft, animRight, animDown;
 	
-	static public  float health=100;
-	static public  float mana=100;
+	public static float health=100;
+	public static float mana=100;
 
 
 	public Mage(float x, float y, ID id, Handler handler, TexturesLoader tl) {
 		super(x, y, id, tl);
 		Game.handler=handler;
-		loader=new TexturesLoader("/wizard.png");
 		
 		//moveUp
 		mageTexturesUp[0]=loader.divideImage(155, 0, 36, 55);

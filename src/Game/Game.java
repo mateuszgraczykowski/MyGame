@@ -12,27 +12,25 @@ public class Game extends Canvas implements Runnable{
 	
 	public static int WIDTH=1000;
 	public static int HEIGHT=564;
+	public static Status gameStatus=Status.Menu;
 	
 	private Thread thread;
 	private boolean isRunning=false;
 	public 	static  Handler handler;
 	private Camera camera;
-	public 	static TexturesLoader tl;
 	private HUD hud=new HUD();
 	private UI ui=new UI();
 	
 	
-	
-	private MapOne mapOne;
-	
-	public static Status gameStatus=Status.Menu;
+	public MapOne mapOne=new MapOne();
 	
 	
 	public Game() {
+		AudioPlayer.init();			
+		AudioPlayer.getMusic("music").loop( 1, 0.01f);			
 		new Window(WIDTH, HEIGHT, "First Game", this);
-		mapOne=new MapOne();
-	
-		tl=new TexturesLoader("/textures.png");	
+		//mapOne=new MapOne();
+		//mapOne=new MapOne();
 		
 		start();
 		
@@ -41,9 +39,11 @@ public class Game extends Canvas implements Runnable{
 		this.addKeyListener(new KeyInput(handler));
 		this.addMouseListener(ui);
 		
-		this.addMouseListener(new MouseInput(handler, camera, tl));
+		this.addMouseListener(new MouseInput(handler, camera));
 	
-		mapOne.loadMap(handler, tl);
+		
+		mapOne.loadMap(handler, null);
+		
 	}
 	
 	private synchronized void start() {	
@@ -102,6 +102,7 @@ public class Game extends Canvas implements Runnable{
 				if(tempObject.getId()==ID.Player)
 					camera.tick(tempObject);
 			}
+			
 		handler.tick();
 		}
 	}

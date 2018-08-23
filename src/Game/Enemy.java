@@ -14,11 +14,11 @@ public class Enemy extends Object {
 	int choose=0;
 	int hp=100;
 	
-	private TexturesLoader loader=new TexturesLoader("/orc.png");
-	private BufferedImage orcTexturesDown[]=new BufferedImage[8];
-	private BufferedImage orcTexturesUp[]=new BufferedImage[8];
-	private BufferedImage orcTexturesRight[]=new BufferedImage[8];
-	private BufferedImage orcTexturesLeft[]=new BufferedImage[8];
+	private static TexturesLoader loader=new TexturesLoader("/orc.png");
+	private static BufferedImage orcTexturesDown[]=new BufferedImage[8];
+	//private static BufferedImage orcTexturesUp[]=new BufferedImage[8];
+	//private static BufferedImage orcTexturesRight[]=new BufferedImage[8];
+	//private static BufferedImage orcTexturesLeft[]=new BufferedImage[8];
 	
 	Animation animUp, animDown, animLeft, animRight;
 		

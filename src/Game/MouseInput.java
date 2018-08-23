@@ -12,12 +12,10 @@ public class MouseInput extends MouseAdapter {
 	
 	private Handler handler;
 	private Camera camera;
-	private TexturesLoader tl;
 	
-	public MouseInput(Handler handler, Camera camera, TexturesLoader tl) {
+	public MouseInput(Handler handler, Camera camera) {
 		this.handler=handler;
 		this.camera=camera;
-		this.tl=tl;
 	}
 			
 	public  void mousePressed(MouseEvent e) {
@@ -26,9 +24,9 @@ public class MouseInput extends MouseAdapter {
 			int my = (int) (e.getY() + camera.getY());
 			for (int i = 0; i < handler.object.size(); ++i) {
 				Object tempObject = handler.object.get(i);
-				if (tempObject.getId() == ID.Player && Mage.mana > 0) {
-					handler.addObject(new Spell((int) tempObject.getX() + 16, (int) tempObject.getY() + 24, ID.Spell,
-							handler, mx, my, tl));
+				if (tempObject.getId() == ID.Player && Mage.mana > 0 && (Game.gameStatus==Status.Game || Game.gameStatus==Status.NewGame)) {
+					handler.addObject(new Spell((int) tempObject.getX() + 16, (int) tempObject.getY() + 24, ID.Spell, handler, mx, my, null));
+					AudioPlayer.getSound("sound_spell").play(3, 0.02f);											
 				}
 			} 
 	}

@@ -7,7 +7,6 @@ import javax.imageio.ImageIO;
 public class TexturesLoader {
 
 	public BufferedImage image;
-	
 	public TexturesLoader(String path) {
 		loadImage(path);
 	}

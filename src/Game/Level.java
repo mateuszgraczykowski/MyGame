@@ -8,9 +8,8 @@ import Object.Mage;
 
 
 public abstract class Level {
-	BufferedImage backgroundTextures;
+	protected BufferedImage backgroundTextures;
 	protected int red, green, blue, pixel;
-	protected int xx=0, yy=0;
 	
 	public abstract void addObjectTextures(Handler handler, TexturesLoader tl, int xx, int yy, int red, int green, int blue);
 	public abstract void removeObjectTextures(Handler handler);
@@ -47,8 +46,7 @@ public abstract class Level {
 				red =(pixel>>16) & 0xff;
 				green =(pixel>>8) & 0xff;
 				blue = (pixel) & 0xff;
-				removeObjectTextures(handler);	
-				
+				removeObjectTextures(handler);					
 			}
 		}
 	}

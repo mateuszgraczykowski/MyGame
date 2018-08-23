@@ -28,7 +28,7 @@ public class UI extends MouseAdapter {
 			//New Game
 			if(checkIntersection(mouseX, mouseY, 350, 120, 300, 75)) {
 				mapOne.removeMap(Game.handler);							
-				mapOne.loadMap(Game.handler, Game.tl);
+				mapOne.loadMap(Game.handler, null);
 				Game.gameStatus=Status.NewGame;
 			}
 			//Exit game
@@ -49,6 +49,7 @@ public class UI extends MouseAdapter {
 	private boolean checkIntersection(int mouseX, int mouseY, int x, int y, int width, int height) {
 		
 		if(mouseX>x && mouseX<x+width && mouseY>y && mouseY<y+height) {
+			AudioPlayer.getSound("sound_menu").play();
 			return true;
 		}else 
 			return false;

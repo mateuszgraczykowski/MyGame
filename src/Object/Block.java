@@ -10,12 +10,13 @@ import Game.TexturesLoader;
 
 public class Block extends Object {
 	
-	private BufferedImage blockTextures;
+	private static BufferedImage blockTextures;
+	private static TexturesLoader loader=new TexturesLoader("/textures.png");
 	
 	public Block(float x, float y, ID id, TexturesLoader tl) {
 		super(x, y, id, tl);
 		
-		blockTextures=tl.divideImage(50, 0, 110, 130);
+		blockTextures=loader.divideImage(50, 0, 110, 130);
 	}
 
 	@Override
@@ -30,6 +31,6 @@ public class Block extends Object {
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int)x, (int)y, 100, 110);
+		return new Rectangle((int)x, (int)y, 95, 105);
 	}
 }
