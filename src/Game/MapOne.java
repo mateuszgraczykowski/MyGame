@@ -6,10 +6,10 @@ import java.awt.image.BufferedImage;
 import Object.Block;
 import Object.Mage;
 import Object.Object;
+import Object.Enemy;
 
 public class MapOne extends Level {
 	
-	//private static BufferedImage image=TexturesContainer.getMap("firstMap");
 	private BufferedImage image=mapsLoader.image;
 	private static TexturesLoader mapsLoader=new TexturesLoader("/map3.png");
 	private static TexturesLoader textureLoader=new TexturesLoader("/textures.png");	
