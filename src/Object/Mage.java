@@ -13,8 +13,6 @@ import Game.TexturesLoader;
 
 public class Mage extends Object {
 	
-	//Handler handler;
-	
 	private static TexturesLoader  loader=new TexturesLoader("/wizard.png");
 	private static BufferedImage mageTexturesDown[]=new BufferedImage[4];
 	private static BufferedImage mageTexturesUp[]=new BufferedImage[4];
@@ -26,10 +24,8 @@ public class Mage extends Object {
 	public static float health=100;
 	public static float mana=100;
 
-
-	public Mage(float x, float y, ID id, Handler handler, TexturesLoader tl) {
-		super(x, y, id, tl);
-		Game.handler=handler;
+	public Mage(float x, float y, ID id, Handler handler) {
+		super(x, y, id);
 		
 		//moveUp
 		mageTexturesUp[0]=loader.divideImage(155, 0, 36, 55);
@@ -98,15 +94,15 @@ public class Mage extends Object {
 	}
 	
 	private void collision() {
-		for(int i= 0; i<Game.handler.object.size();++i) {
-			Object tempObject=Game.handler.object.get(i);
+		for(int i= 0; i<Handler.object.size();++i) {
+			Object tempObject=Handler.object.get(i);
 			if(tempObject.getId()==ID.Block && getBounds().intersects(tempObject.getBounds())==true) {
 					x+=velX*-1;
 					y+=velY*-1;
 			}
 			else if(tempObject.getId()==ID.Enemy && getBounds().intersects(tempObject.getBounds())) {
 				if(health==0) {
-					Game.handler.removeObject(this);
+					Handler.removeObject(this);
 					Game.gameStatus=Status.Menu;
 				}else {
 					health-=1;

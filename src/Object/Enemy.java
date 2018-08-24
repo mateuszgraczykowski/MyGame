@@ -1,5 +1,6 @@
 package Object;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -12,7 +13,6 @@ import Game.TexturesLoader;
 
 public class Enemy extends Object {
 	
-	private Handler handler;
 	Random r=new Random();
 	int choose=0;
 	int hp=100;
@@ -27,9 +27,8 @@ public class Enemy extends Object {
 		
 	private float diffX, diffY, distance;
 	
-	public Enemy(float x, float y, ID id, Handler handler, TexturesLoader tl) {
-		super(x, y, id, tl);
-		this.handler=handler;
+	public Enemy(float x, float y, ID id, Handler handler) {
+		super(x, y, id);
 		
 		//moveDown
 		orcTexturesDown[0]=loader.divideImage(0, 78, 30, 35);
@@ -47,8 +46,8 @@ public class Enemy extends Object {
 		
 		choose = r.nextInt(100);
 		
-		for(int i= 0; i<handler.object.size();++i) {
-			Object tempObject=handler.object.get(i);
+		for(int i= 0; i<Handler.object.size();++i) {
+			Object tempObject=Handler.object.get(i);
 			
 			if(tempObject.getId()==ID.Player && getAgro().intersects(tempObject.getBounds())) {
 			
@@ -70,16 +69,22 @@ public class Enemy extends Object {
 				}
 			}else if(tempObject.getId()==ID.Spell && getBounds().intersects(tempObject.getBounds())) {
 				hp-=50;
-				handler.removeObject(tempObject);
+				Handler.removeObject(tempObject);
 			}
 		}
-		if(hp<=0) handler.removeObject(this);
+		if(hp<=0) Handler.removeObject(this);
 		
 		animDown.runAnimation();
 	}
 
 	@Override
 	public void render(Graphics g) {
+		
+		g.setColor(Color.DARK_GRAY);
+		g.fillRect((int)x, (int)y-10, 33, 5);
+		g.setColor(Color.GREEN);
+		g.fillRect((int)x, (int)y-10, hp/3, 5);
+		
 		if(velX==0 && velY==0) {
 			g.drawImage(orcTexturesDown[0], (int)x, (int)y, null);
 		}else

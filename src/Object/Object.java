@@ -12,11 +12,10 @@ public abstract class Object {
 	protected ID id;
 	protected TexturesLoader tl;
 	
-	public Object(float x, float y, ID id, TexturesLoader tl) {
+	public Object(float x, float y, ID id) {
 		this.x=x;
 		this.y=y;
 		this.id=id;
-		this.tl=tl;
 	}
 	
 	public abstract void tick();

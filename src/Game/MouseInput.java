@@ -22,10 +22,10 @@ public class MouseInput extends MouseAdapter {
 		
 			int mx = (int) (e.getX() + camera.getX());
 			int my = (int) (e.getY() + camera.getY());
-			for (int i = 0; i < handler.object.size(); ++i) {
-				Object tempObject = handler.object.get(i);
+			for (int i = 0; i < Handler.object.size(); ++i) {
+				Object tempObject = Handler.object.get(i);
 				if (tempObject.getId() == ID.Player && Mage.mana > 0 && (Game.gameStatus==Status.Game || Game.gameStatus==Status.NewGame)) {
-					handler.addObject(new Spell((int) tempObject.getX() + 16, (int) tempObject.getY() + 24, ID.Spell, handler, mx, my, null));
+					Handler.addObject(new Spell((int) tempObject.getX() + 16, (int) tempObject.getY() + 24, ID.Spell, handler, mx, my));
 					AudioPlayer.getSound("sound_spell").play(3, 0.02f);											
 				}
 			} 

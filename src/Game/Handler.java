@@ -7,7 +7,7 @@ import Object.Object;
 
 public class Handler {
 
-	public LinkedList<Object> object=new LinkedList<Object>();
+	public static LinkedList<Object> object=new LinkedList<Object>();
 	
 	private boolean up=false, down=false, right=false, left=false; 
 	
@@ -43,7 +43,7 @@ public class Handler {
 		this.left = left;
 	}
 
-	public void tick() {
+	public static void tick() {
 		
 		 for(int i = 0; i <object.size();++i) {
 			  Object tempObject = object.get(i);
@@ -51,18 +51,18 @@ public class Handler {
 		}
 	}
 	
-	public void render(Graphics g) {
+	public static void render(Graphics g) {
 		  for(int i = 0; i <object.size();++i) {
 			  Object tempObject = object.get(i);
 			  tempObject.render(g);
 		  }
 	}
 	
-	public void addObject(Object tempObject) {
+	public static void addObject(Object tempObject) {
 		object.add(tempObject);
 	}
 	
-	public void removeObject(Object tempObject) {
+	public static void removeObject(Object tempObject) {
 		object.remove(tempObject);
 	}
 }

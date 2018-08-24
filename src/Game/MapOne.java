@@ -3,7 +3,7 @@ package Game;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import Object.Block;
+import Object.Tree;
 import Object.Mage;
 import Object.Object;
 import Object.Enemy;
@@ -24,8 +24,8 @@ public class MapOne extends Level {
 		super.loadBackground(g, backgroundTextures);
 	}
 	
-	public void loadMap(Handler handler, TexturesLoader tl) {
-		super.loadMap(handler, tl, image);		
+	public void loadMap(Handler handler) {
+		super.loadMap(handler, image);		
 	}
 	
 	public void removeMap(Handler handler) {
@@ -35,25 +35,25 @@ public class MapOne extends Level {
 
 
 	@Override
-	public void addObjectTextures(Handler handler, TexturesLoader tl, int xx, int yy, int red, int green, int blue) {
+	public void addObjectTextures(Handler handler, int xx, int yy, int red, int green, int blue) {
 		if(red == 255) {
-			handler.addObject(new Block(xx*32, yy*32, ID.Block, null));
+			Handler.addObject(new Tree(xx*32, yy*32, ID.Block));
 		}
 		if(blue == 255) {
-			handler.addObject(new Mage(xx*12, yy*5, ID.Player, handler, null));
+			Handler.addObject(new Mage(xx*12, yy*5, ID.Player, handler));
 		}
 		if(green==255) {
-			handler.addObject(new Enemy(xx*32, yy*32, ID.Enemy, handler, null));
+			Handler.addObject(new Enemy(xx*32, yy*32, ID.Enemy, handler));
 		}
 	}
 
 	@Override
 	public void removeObjectTextures(Handler handler) {
 		
-		for(int i= 0; i<handler.object.size();++i) {
-			Object tempObject=handler.object.get(i);		
+		for(int i= 0; i<Handler.object.size();++i) {
+			Object tempObject=Handler.object.get(i);		
 		
-			handler.removeObject(tempObject);			
+			Handler.removeObject(tempObject);			
 		}
 	}
 }

@@ -11,14 +11,14 @@ public abstract class Level {
 	protected BufferedImage backgroundTextures;
 	protected int red, green, blue, pixel;
 	
-	public abstract void addObjectTextures(Handler handler, TexturesLoader tl, int xx, int yy, int red, int green, int blue);
+	public abstract void addObjectTextures(Handler handler, int xx, int yy, int red, int green, int blue);
 	public abstract void removeObjectTextures(Handler handler);
 
 	protected Level() {
 		
 	}
 	
-	public void loadMap(Handler handler, TexturesLoader tl, BufferedImage image) {
+	public void loadMap(Handler handler, BufferedImage image) {
 		int w=image.getWidth();
 		int h=image.getHeight();
 		
@@ -31,7 +31,7 @@ public abstract class Level {
 				red =(pixel>>16) & 0xff;
 				green =(pixel>>8) & 0xff;
 				blue = (pixel) & 0xff;
-				addObjectTextures(handler, tl, xx, yy, red, green, blue);			
+				addObjectTextures(handler, xx, yy, red, green, blue);			
 			}
 		}
 	}

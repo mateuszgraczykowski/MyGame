@@ -29,8 +29,6 @@ public class Game extends Canvas implements Runnable{
 		AudioPlayer.init();			
 		AudioPlayer.getMusic("music").loop( 1, 0.01f);			
 		new Window(WIDTH, HEIGHT, "First Game", this);
-		//mapOne=new MapOne();
-		//mapOne=new MapOne();
 		
 		start();
 		
@@ -41,9 +39,7 @@ public class Game extends Canvas implements Runnable{
 		
 		this.addMouseListener(new MouseInput(handler, camera));
 	
-		
-		mapOne.loadMap(handler, null);
-		
+		mapOne.loadMap(handler);
 	}
 	
 	private synchronized void start() {	
@@ -81,7 +77,6 @@ public class Game extends Canvas implements Runnable{
 				tick();
 				delta--;
 			}
-			
 			render();
 			frames++;
 			
@@ -96,14 +91,14 @@ public class Game extends Canvas implements Runnable{
 	private void tick() {
 		//This method responds for update the game.
 		if(gameStatus==Status.Game || gameStatus==Status.NewGame) {
-			for(int i= 0; i<handler.object.size();++i) {
-				Object tempObject=handler.object.get(i);
+			for(int i= 0; i<Handler.object.size();++i) {
+				Object tempObject=Handler.object.get(i);
 				
 				if(tempObject.getId()==ID.Player)
 					camera.tick(tempObject);
 			}
 			
-		handler.tick();
+		Handler.tick();
 		}
 	}
 	
@@ -123,7 +118,7 @@ public class Game extends Canvas implements Runnable{
 			
 			mapOne.loadBackground(g);
 		
-			handler.render(g);
+			Handler.render(g);
 			g2d.translate(camera.getX(), camera.getY());
 			hud.draw(g);
 		}
