@@ -8,7 +8,7 @@ import Game.Handler;
 import Game.ID;
 import Game.TexturesLoader;
 
-public class Spell extends Object {
+public class FireballSpell extends Object {
 	
 	private static TexturesLoader loader=new TexturesLoader("/spellFire.png");
 	private static BufferedImage spellTextures[]=new BufferedImage[13];
@@ -18,7 +18,7 @@ public class Spell extends Object {
 	private float spellRange=250;
 	private float manaCost=2;
 	
-	public Spell(float x, float y, ID id, Handler handler, int mx, int my) {
+	public FireballSpell(float x, float y, ID id, Handler handler, int mx, int my) {
 		super(x, y, id);
 		
 		spellTextures[0]=loader.divideImage(2, 8, 6, 11);

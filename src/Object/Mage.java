@@ -13,7 +13,7 @@ import Game.TexturesLoader;
 
 public class Mage extends Object {
 	
-	private static TexturesLoader  loader=new TexturesLoader("/wizard.png");
+	public static TexturesLoader  loader=new TexturesLoader("/wizard.png");
 	private static BufferedImage mageTexturesDown[]=new BufferedImage[4];
 	private static BufferedImage mageTexturesUp[]=new BufferedImage[4];
 	private static BufferedImage mageTexturesLeft[]=new BufferedImage[4];

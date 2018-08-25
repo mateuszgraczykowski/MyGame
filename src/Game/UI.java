@@ -98,7 +98,7 @@ public class UI extends MouseAdapter {
 				g.drawRect(350, 150, 300, 75);
 				g.drawString("BACK", 470, 190);
 				
-				g.drawString("Use WASD to move and LBM to fire.", 50, 400);
+				g.drawString("Use WASD to move and LMB to fire.", 50, 400);
 				
 				g.setFont(new Font("arial", 1, 50));
 				g.drawString("HELP", 437, 75);				

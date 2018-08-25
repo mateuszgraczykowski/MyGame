@@ -2,12 +2,17 @@ package Game;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import Object.Mage;
 
 
 
 public abstract class Level {
+	
+	protected static Random random=new Random();
+	protected static int choose;
+	
 	protected BufferedImage backgroundTextures;
 	protected int red, green, blue, pixel;
 	
@@ -15,7 +20,6 @@ public abstract class Level {
 	public abstract void removeObjectTextures(Handler handler);
 
 	protected Level() {
-		
 	}
 	
 	public void loadMap(Handler handler, BufferedImage image) {
@@ -35,10 +39,10 @@ public abstract class Level {
 			}
 		}
 	}
+	
 	public void removeMap(Handler handler, BufferedImage image) {
 		int w=image.getWidth();
 		int h=image.getHeight();
-		
 		
 		for(int xx=0; xx<w; ++xx) {
 			for(int yy=0;yy<h;++yy) {
@@ -51,7 +55,6 @@ public abstract class Level {
 		}
 	}
 	
-	
 	public void loadBackground(Graphics g, BufferedImage backgroundTextures) {
 		
 		for(int xx=0;xx<30*72; xx+=32) {
@@ -60,5 +63,4 @@ public abstract class Level {
 			}
 		}
 	}
-
 }

@@ -13,17 +13,20 @@ public class Tree extends Object {
 	
 	private Random random=new Random();
 	private int choose=0; 
-	private static BufferedImage treeTextures[]=new BufferedImage[3];
+	private static BufferedImage treeTextures[]=new BufferedImage[6];
 	private static TexturesLoader loader=new TexturesLoader("/tree.png");
 		
 	public Tree(float x, float y, ID id) {
 		super(x, y, id);
 		
-		choose=random.nextInt(2);
+		choose=random.nextInt(6);
 		
 		treeTextures[0]=loader.divideImage(6, 160, 110, 125);
 		treeTextures[1]=loader.divideImage(135, 160, 110, 125);
 		treeTextures[2]=loader.divideImage(265, 160, 110, 125);		
+		treeTextures[3]=loader.divideImage(6, 160, 110, 110);
+		treeTextures[4]=loader.divideImage(135, 160, 110, 113);
+		treeTextures[5]=loader.divideImage(265, 160, 110, 112);		
 	}
 
 	@Override
@@ -32,7 +35,12 @@ public class Tree extends Object {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(treeTextures[choose], (int)x, (int)y, null);
+		if(choose<3) {
+			g.drawImage(treeTextures[choose], (int)x, (int)y, null);
+		}
+		if(choose>=3) {
+			g.drawImage(treeTextures[choose], (int)x, (int)y+15, null);
+		}
 	}
 
 	@Override

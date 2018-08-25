@@ -15,9 +15,9 @@ public class Enemy extends Object {
 	
 	Random r=new Random();
 	int choose=0;
-	int hp=100;
+	int helthOrc=100;
 	
-	private TexturesLoader loader=new TexturesLoader("/orc.png");
+	private static TexturesLoader loader=new TexturesLoader("/orc.png");
 	private BufferedImage orcTexturesDown[]=new BufferedImage[8];
 	//private BufferedImage orcTexturesUp[]=new BufferedImage[8];
 	//private BufferedImage orcTexturesRight[]=new BufferedImage[8];
@@ -27,7 +27,7 @@ public class Enemy extends Object {
 		
 	private float diffX, diffY, distance;
 	
-	public Enemy(float x, float y, ID id, Handler handler) {
+	public Enemy(float x, float y, ID id) {
 		super(x, y, id);
 		
 		//moveDown
@@ -49,6 +49,11 @@ public class Enemy extends Object {
 		for(int i= 0; i<Handler.object.size();++i) {
 			Object tempObject=Handler.object.get(i);
 			
+		
+			if(tempObject.getId()==ID.Spell && tempObject.getBounds().intersects(getBounds())) {
+				helthOrc-=10;
+			}
+			
 			if(tempObject.getId()==ID.Player && getAgro().intersects(tempObject.getBounds())) {
 			
 				diffX=x-tempObject.getX();
@@ -68,11 +73,11 @@ public class Enemy extends Object {
 					velY=(r.nextInt(2));
 				}
 			}else if(tempObject.getId()==ID.Spell && getBounds().intersects(tempObject.getBounds())) {
-				hp-=50;
+				helthOrc-=50;
 				Handler.removeObject(tempObject);
 			}
 		}
-		if(hp<=0) Handler.removeObject(this);
+		if(helthOrc<=0) Handler.removeObject(this);
 		
 		animDown.runAnimation();
 	}
@@ -83,7 +88,7 @@ public class Enemy extends Object {
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect((int)x, (int)y-10, 33, 5);
 		g.setColor(Color.GREEN);
-		g.fillRect((int)x, (int)y-10, hp/3, 5);
+		g.fillRect((int)x, (int)y-10, helthOrc/3, 5);
 		
 		if(velX==0 && velY==0) {
 			g.drawImage(orcTexturesDown[0], (int)x, (int)y, null);

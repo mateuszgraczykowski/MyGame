@@ -5,4 +5,5 @@ public enum ID {
 	Enemy(),
 	Block(),
 	Spell(),
+	Boss(),
 }
