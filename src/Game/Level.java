@@ -56,11 +56,6 @@ public abstract class Level {
 	}
 	
 	public void loadBackground(Graphics g, BufferedImage backgroundTextures) {
-		
-		for(int xx=0;xx<30*72; xx+=32) {
-			for(int yy=0; yy<30*72; yy+=32) {
-				g.drawImage(backgroundTextures, xx, yy, null);
-			}
-		}
+		g.drawImage(backgroundTextures, 0, 0, null);
 	}
 }

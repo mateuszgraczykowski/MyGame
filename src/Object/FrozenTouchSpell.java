@@ -5,10 +5,10 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 
-import Game.Game;
+import Game.Handler;
 import Game.ID;
 
-public class FrozenTouchSpell extends Object{
+public class FrozenTouchSpell extends Object implements ObjectInterface{
 	
 	private static BufferedImage frozenWave[]=new BufferedImage[4];
 	
@@ -29,16 +29,16 @@ public class FrozenTouchSpell extends Object{
 	@Override
 	public void render(Graphics g) {
 		
-		if(Game.handler.isDown() || (velX==0 && velY==0)) {
+		if(Handler.isDown() || (velX==0 && velY==0)) {
 			g.drawImage(frozenWave[3], (int)x, (int)y, null);
 		}
-		if(Game.handler.isRight() || (Game.handler.isRight() && Game.handler.isDown()) || (Game.handler.isRight() && Game.handler.isUp()) ){
+		if(Handler.isRight() || (Handler.isRight() && Handler.isDown()) || (Handler.isRight() && Handler.isUp()) ){
 			g.drawImage(frozenWave[2], (int)x, (int)y, null);
 		}
-		else if(Game.handler.isLeft() || (Game.handler.isLeft() && Game.handler.isDown()) || (Game.handler.isLeft() && Game.handler.isUp())) {
+		else if(Handler.isLeft() || (Handler.isLeft() && Handler.isDown()) || (Handler.isLeft() && Handler.isUp())) {
 			g.drawImage(frozenWave[1], (int)x, (int)y, null);
 		}
-		else if(Game.handler.isUp()) {
+		else if(Handler.isUp()) {
 			g.drawImage(frozenWave[1], (int)x, (int)y, null);
 		}
 	}
@@ -46,6 +46,16 @@ public class FrozenTouchSpell extends Object{
 	@Override
 	public Rectangle getBounds() {
 		return new Rectangle((int)x,(int)y, 54, 55);
+	}
+
+	@Override
+	public float getOX() {
+		return x;
+	}
+
+	@Override
+	public float getOY() {
+		return y;
 	}
 
 }

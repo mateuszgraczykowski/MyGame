@@ -6,4 +6,5 @@ public enum ID {
 	Block(),
 	Spell(),
 	Boss(),
+	Water(),
 }

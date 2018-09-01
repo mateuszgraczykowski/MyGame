@@ -3,66 +3,66 @@ package Game;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
-import Object.Object;
+import Object.ObjectInterface;
 
 public class Handler {
 
-	public static LinkedList<Object> object=new LinkedList<Object>();
+	public static LinkedList<ObjectInterface> object=new LinkedList<ObjectInterface>();
 	
-	private boolean up=false, down=false, right=false, left=false; 
+	private static boolean up=false, down=false, right=false, left=false; 
 	
-	public boolean isUp() {
+	public static boolean isUp() {
 		return up;
 	}
 
 	public void setUp(boolean up) {
-		this.up = up;
+		Handler.up = up;
 	}
 
-	public boolean isDown() {
+	public static boolean isDown() {
 		return down;
 	}
 
 	public void setDown(boolean down) {
-		this.down = down;
+		Handler.down = down;
 	}
 
-	public boolean isRight() {
+	public static boolean isRight() {
 		return right;
 	}
 
 	public void setRight(boolean right) {
-		this.right = right;
+		Handler.right = right;
 	}
 
-	public boolean isLeft() {
+	public static boolean isLeft() {
 		return left;
 	}
 
 	public void setLeft(boolean left) {
-		this.left = left;
+		Handler.left = left;
 	}
 
 	public static void tick() {
 		
 		 for(int i = 0; i <object.size();++i) {
-			  Object tempObject = object.get(i);
+			 ObjectInterface tempObject = object.get(i);
 			  tempObject.tick();
 		}
 	}
 	
 	public static void render(Graphics g) {
 		  for(int i = 0; i <object.size();++i) {
-			  Object tempObject = object.get(i);
+			  ObjectInterface tempObject = object.get(i);
 			  tempObject.render(g);
 		  }
 	}
 	
-	public static void addObject(Object tempObject) {
+	public static void addObject(ObjectInterface tempObject) {
 		object.add(tempObject);
 	}
 	
-	public static void removeObject(Object tempObject) {
+	public static void removeObject(ObjectInterface tempObject) {
 		object.remove(tempObject);
 	}
 }

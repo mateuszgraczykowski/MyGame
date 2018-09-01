@@ -8,7 +8,7 @@ import Game.Handler;
 import Game.ID;
 import Game.TexturesLoader;
 
-public class FireballSpell extends Object {
+public class FireballSpell extends Object implements ObjectInterface{
 	
 	private static TexturesLoader loader=new TexturesLoader("/spellFire.png");
 	private static BufferedImage spellTextures[]=new BufferedImage[13];
@@ -37,10 +37,10 @@ public class FireballSpell extends Object {
 		x+=velX;
 		y+=velY;
 		for(int i=0; i<Handler.object.size(); ++i) {
-			Object tempObject=Handler.object.get(i);
+			ObjectInterface tempObject=Handler.object.get(i);
 			if(tempObject.getId()==ID.Player) {				
-				diffX=x-tempObject.getX();
-				diffY=y-tempObject.getY();
+				diffX=x-tempObject.getOX();
+				diffY=y-tempObject.getOY();
 				distance=(float) Math.sqrt(diffX*diffX+diffY*diffY);
 				
 				if (distance>spellRange) {
@@ -64,4 +64,15 @@ public class FireballSpell extends Object {
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, 4, 4);
 	}
+
+	@Override
+	public float getOX() {
+		return x;
+	}
+
+	@Override
+	public float getOY() {
+		return y;
+	}
+
 }

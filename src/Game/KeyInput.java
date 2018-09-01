@@ -3,7 +3,7 @@ package Game;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import Object.Object;
+import Object.ObjectInterface;
 
 public class KeyInput extends KeyAdapter {
 	
@@ -16,13 +16,14 @@ public class KeyInput extends KeyAdapter {
 	public void keyPressed(KeyEvent e) {
 		int key=e.getKeyCode();
 		
-		for(Object tempObject:Handler.object) {
+		for(int i= 0; i<Handler.object.size();++i) {
+			ObjectInterface tempObject=Handler.object.get(i);
 			if(tempObject.getId()==ID.Player) {
 				if(key==KeyEvent.VK_W) handler.setUp(true);
 				if(key==KeyEvent.VK_S) handler.setDown(true);
 				if(key==KeyEvent.VK_D) handler.setRight(true);
 				if(key==KeyEvent.VK_A) handler.setLeft(true);
-				if(key==KeyEvent.VK_ESCAPE) Game.gameStatus=Status.Menu;
+				if(key==KeyEvent.VK_ESCAPE) Main.gameStatus=Status.Menu;
 			}
 		}
 	}
@@ -30,7 +31,8 @@ public class KeyInput extends KeyAdapter {
 	public void keyReleased(KeyEvent e) {
 		int key=e.getKeyCode();
 		
-		for(Object tempObject:Handler.object) {
+		for(int i= 0; i<Handler.object.size();++i) {
+			ObjectInterface tempObject=Handler.object.get(i);
 			if(tempObject.getId()==ID.Player) {
 				if(key==KeyEvent.VK_W) handler.setUp(false);
 				if(key==KeyEvent.VK_S) handler.setDown(false);
@@ -38,7 +40,6 @@ public class KeyInput extends KeyAdapter {
 				if(key==KeyEvent.VK_A) handler.setLeft(false);
 			}
 		}
-		
 	}
 }
 

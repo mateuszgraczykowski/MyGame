@@ -11,11 +11,12 @@ import Game.Handler;
 import Game.ID;
 import Game.TexturesLoader;
 
-public class Enemy extends Object {
+public class Enemy extends Object implements ObjectInterface {
 	
 	Random r=new Random();
 	int choose=0;
 	int helthOrc=100;
+	
 	
 	private static TexturesLoader loader=new TexturesLoader("/orc.png");
 	private BufferedImage orcTexturesDown[]=new BufferedImage[8];
@@ -47,7 +48,7 @@ public class Enemy extends Object {
 		choose = r.nextInt(100);
 		
 		for(int i= 0; i<Handler.object.size();++i) {
-			Object tempObject=Handler.object.get(i);
+			ObjectInterface tempObject=Handler.object.get(i);
 			
 		
 			if(tempObject.getId()==ID.Spell && tempObject.getBounds().intersects(getBounds())) {
@@ -56,8 +57,8 @@ public class Enemy extends Object {
 			
 			if(tempObject.getId()==ID.Player && getAgro().intersects(tempObject.getBounds())) {
 			
-				diffX=x-tempObject.getX();
-				diffY=y-tempObject.getY();
+				diffX=x-tempObject.getOX();
+				diffY=y-tempObject.getOY();
 				distance=(float) Math.sqrt(diffX*diffX+diffY*diffY);
 			
 				velX=(float) ((-1.0/distance)*diffX)*2;
@@ -73,7 +74,7 @@ public class Enemy extends Object {
 					velY=(r.nextInt(2));
 				}
 			}else if(tempObject.getId()==ID.Spell && getBounds().intersects(tempObject.getBounds())) {
-				helthOrc-=50;
+				helthOrc-=20;
 				Handler.removeObject(tempObject);
 			}
 		}
@@ -106,6 +107,16 @@ public class Enemy extends Object {
 	}
 	
 	public Rectangle getAgro() {
-		return new Rectangle((int)x-120, (int)y-120,(int)x+ 152, (int)y+152);
+		return new Rectangle((int)x-150, (int)y-150,(int)x+ 202, (int)y+202);
+	}
+	
+	@Override
+	public float getOX() {
+		return x;
+	}
+
+	@Override
+	public float getOY() {
+		return y;
 	}
 }

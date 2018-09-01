@@ -1,6 +1,6 @@
 package Game;
 
-import Object.Object;
+import Object.ObjectInterface;
 
 public class Camera {
 	
@@ -11,9 +11,9 @@ public class Camera {
 		this.y=y;
 	}
 	
-	public void tick(Object object) {
-		x+=((object.getX()-x)-1000/2)*0.05f;
-		y+=((object.getY()-y)-564/2)*0.05f;
+	public void tick(ObjectInterface tempObject) {
+		x+=((tempObject.getOX()-x)-1000/2)*0.05f;
+		y+=((tempObject.getOY()-y)-564/2)*0.05f;
 		
 		if(x<=0) x=0;
 		if(x>=1070) x=1070;

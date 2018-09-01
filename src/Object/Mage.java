@@ -11,7 +11,7 @@ import Game.ID;
 import Game.Status;
 import Game.TexturesLoader;
 
-public class Mage extends Object {
+public class Mage extends Object implements ObjectInterface{
 	
 	public static TexturesLoader  loader=new TexturesLoader("/wizard.png");
 	private static BufferedImage mageTexturesDown[]=new BufferedImage[4];
@@ -23,8 +23,9 @@ public class Mage extends Object {
 	
 	public static float health=100;
 	public static float mana=100;
+	float  speedChange=(float) 1.5;
 
-	public Mage(float x, float y, ID id, Handler handler) {
+	public Mage(float x, float y, ID id) {
 		super(x, y, id);
 		
 		//moveUp
@@ -57,34 +58,26 @@ public class Mage extends Object {
 		animDown=new Animation(3,mageTexturesDown[0], mageTexturesDown[1], mageTexturesDown[0], mageTexturesDown[2]);
 		//animSpell=new Animation(3,mageTexturesDown[3], mageTexturesDown[0]);		
 	}
-	
-	public float getX() {
-		return x;
-	}
-
-	public float getY() {
-		return y;
-	}
 
 	@Override
 	public void tick() {
 		x+=velX;
 		y+=velY;
-		float speedChange=(float) 1.5;
+		//float speedChange=(float) 1.5;
 		
 		collision();
 		
-		if(Game.handler.isUp()) velY=-speedChange;
-		else if(!Game.handler.isDown()) velY=0;
+		if(Handler.isUp()) velY=-speedChange;
+		else if(!Handler.isDown()) velY=0;
 		
-		if(Game.handler.isDown()) velY=speedChange;
-		else if(!Game.handler.isUp()) velY=0;
+		if(Handler.isDown()) velY=speedChange;
+		else if(!Handler.isUp()) velY=0;
 		
-		if(Game.handler.isRight()) velX=speedChange;
-		else if(!Game.handler.isLeft()) velX=0;
+		if(Handler.isRight()) velX=speedChange;
+		else if(!Handler.isLeft()) velX=0;
 		
-		if(Game.handler.isLeft()) velX=-speedChange;
-		else if(!Game.handler.isRight()) velX=0;
+		if(Handler.isLeft()) velX=-speedChange;
+		else if(!Handler.isRight()) velX=0;
 		
 		animUp.runAnimation();
 		animLeft.runAnimation();
@@ -94,8 +87,12 @@ public class Mage extends Object {
 	}
 	
 	private void collision() {
+		speedChange=1.5f;
+		
+		
+		
 		for(int i= 0; i<Handler.object.size();++i) {
-			Object tempObject=Handler.object.get(i);
+			ObjectInterface tempObject=Handler.object.get(i);
 			if(tempObject.getId()==ID.Block && getBounds().intersects(tempObject.getBounds())==true) {
 					x+=velX*-1;
 					y+=velY*-1;
@@ -107,7 +104,10 @@ public class Mage extends Object {
 				}else {
 					health-=1;
 				}
-			}			
+			}
+			else if(tempObject.getId()==ID.Water && getBounds().intersects(tempObject.getBounds())) {
+					speedChange=0.5f;
+			}
 		}
 	}
 	
@@ -117,16 +117,16 @@ public class Mage extends Object {
 		if(velX==0 && velY==0) {
 			g.drawImage(mageTexturesDown[0], (int)x, (int)y, null);
 		}
-		if(Game.handler.isRight() || (Game.handler.isRight() && Game.handler.isDown()) || (Game.handler.isRight() && Game.handler.isUp()) ){
+		if(Handler.isRight() || (Handler.isRight() && Handler.isDown()) || (Handler.isRight() && Handler.isUp()) ){
 			animRight.drawAnimation(g, x, y);
 		}
-		else if(Game.handler.isLeft() || (Game.handler.isLeft() && Game.handler.isDown()) || (Game.handler.isLeft() && Game.handler.isUp())) {
+		else if(Handler.isLeft() || (Handler.isLeft() && Handler.isDown()) || (Handler.isLeft() && Handler.isUp())) {
 			animLeft.drawAnimation(g, x, y);
 		}
-		else if(Game.handler.isDown()) {
+		else if(Handler.isDown()) {
 			animDown.drawAnimation(g, x, y);
 		}
-		else if(Game.handler.isUp()) {
+		else if(Handler.isUp()) {
 			animUp.drawAnimation(g, x, y);
 		}
 	}
@@ -134,5 +134,15 @@ public class Mage extends Object {
 	@Override
 	public Rectangle getBounds() {		
 		return new Rectangle((int)x-10,(int)y+5, 33, 50);
+	}
+
+	@Override
+	public float getOX() {
+		return x;
+	}
+
+	@Override
+	public float getOY() {
+		return y;
 	}
 }

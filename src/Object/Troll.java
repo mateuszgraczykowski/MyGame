@@ -11,7 +11,7 @@ import Game.Handler;
 import Game.ID;
 import Game.TexturesLoader;
 
-public class Troll extends Object {
+public class Troll extends Object implements ObjectInterface{
 	
 	private int hp=1000;
 	private float diffX, diffY, distance;
@@ -79,12 +79,12 @@ public class Troll extends Object {
 		choose = r.nextInt(100);
 		
 		for(int i= 0; i<Handler.object.size();++i) {
-			Object tempObject=Handler.object.get(i);
+			ObjectInterface tempObject=Handler.object.get(i);
 		
 			if(tempObject.getId()==ID.Player && getAgro().intersects(tempObject.getBounds())) {
 			
-				diffX=x-tempObject.getX();
-				diffY=y-tempObject.getY();
+				diffX=x-tempObject.getOX();
+				diffY=y-tempObject.getOY();
 				distance=(float) Math.sqrt(diffX*diffX+diffY*diffY);
 			
 				velX=(float) ((-1.0/distance)*diffX)*2;
@@ -149,5 +149,15 @@ public class Troll extends Object {
 	
 	private Rectangle getBoundsBig() {
 		return new Rectangle((int)x,(int) y, 381, 263);
+	}
+
+	@Override
+	public float getOX() {
+		return x;
+	}
+
+	@Override
+	public float getOY() {
+		return y;
 	}
 }

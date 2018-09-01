@@ -9,7 +9,7 @@ import Game.ID;
 import Game.TexturesLoader;
 
 
-public class Tree extends Object {
+public class Tree extends Object implements ObjectInterface{
 	
 	private Random random=new Random();
 	private int choose=0; 
@@ -46,5 +46,15 @@ public class Tree extends Object {
 	@Override
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, 95, 105);
+	}
+
+	@Override
+	public float getOX() {
+		return x;
+	}
+
+	@Override
+	public float getOY() {
+		return y;
 	}
 }

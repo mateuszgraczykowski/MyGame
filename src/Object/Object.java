@@ -3,14 +3,12 @@ package Object;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import Game.ID;
-import Game.TexturesLoader;
 
 public abstract class Object {
 
 	public float x,y;
 	protected float velX, velY;
 	protected ID id;
-	protected TexturesLoader tl;
 	
 	public Object(float x, float y, ID id) {
 		this.x=x;
