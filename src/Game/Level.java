@@ -41,6 +41,7 @@ public abstract class Level {
 	}
 	
 	public void removeMap(Handler handler, BufferedImage image) {
+		
 		int w=image.getWidth();
 		int h=image.getHeight();
 		
@@ -50,6 +51,7 @@ public abstract class Level {
 				red =(pixel>>16) & 0xff;
 				green =(pixel>>8) & 0xff;
 				blue = (pixel) & 0xff;
+				
 				removeObjectTextures(handler);					
 			}
 		}

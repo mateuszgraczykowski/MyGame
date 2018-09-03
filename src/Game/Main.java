@@ -8,7 +8,7 @@ public class Main {
 	public static Status gameStatus=Status.Menu;
 	
 	public static void main(String[] args) {
-		ThreadPool threadPool=new ThreadPool(2);
+		ThreadPool threadPool=new ThreadPool(1);
 		final Game game=new Game();
 		new Window(WIDTH, HEIGHT, "Game", game);
 		threadPool.runTask(game);

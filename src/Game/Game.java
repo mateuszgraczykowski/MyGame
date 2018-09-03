@@ -12,22 +12,20 @@ public class Game extends Canvas implements Runnable{
 	
 	public static int WIDTH=1000;
 	public static int HEIGHT=564;
-	public static Status gameStatus=Status.Menu;
 		
 	private boolean isRunning=false;
 	public 	static  Handler handler;
 	private Camera camera;
 	private HUD hud=new HUD();
 	private UI ui=new UI();
-	public WaterThread waterThread[]=new WaterThread[3];
-
+	public WaterThread waterThread[]=new WaterThread[1];
 	
 	public MapOne mapOne=new MapOne();
 	
 	public Game() {
 		
 		AudioPlayer.init();			
-		AudioPlayer.getMusic("music").loop( 1, 0.01f);			
+		AudioPlayer.getMusic("music").loop( 1, 0.03f);			
 		start();
 		
 		handler=new Handler();
@@ -83,11 +81,10 @@ public class Game extends Canvas implements Runnable{
 	
 	//This method responds for update the game.
 	private void tick() {
-		waterThread[0]=new WaterThread(750, 210, ID.Water);
-		waterThread[1]=new WaterThread(760, 210, ID.Water);
-
+		waterThread[0]=new WaterThread();
 		waterThread[0].start();
-		waterThread[1].start();
+	
+	
 		if(Main.gameStatus==Status.Game || Main.gameStatus==Status.NewGame) {
 			for(int i= 0; i<Handler.object.size();++i) {
 				ObjectInterface tempObject=Handler.object.get(i);

@@ -7,20 +7,25 @@ public class WaterThread extends Thread {
 	
 	private int speed=4;
 	private static int index;
-	private float x, y;
-	private ID id;
+	public float x=710, y=20;
+	private ID id=ID.Water;
+	public static int waterLimit=250;
+	public static int waterIndex=0;
 	
-	public WaterThread(float x, float y, ID id) {	
-		this.x=x;
-		this.y=y;
-		this.id=id;
+	public WaterThread() {
 	}
 	
 	public void run() {
-		index++;
-		if(index>speed) {
-			index=0;
-			Handler.addObject(new Water(x, y, id));
+		
+		if(waterIndex<waterLimit) {
+			waterIndex++;
+			index++;
+			if(index>speed) {
+				index=0;
+				Handler.addObject(new Water(x, y, id));
+				Handler.addObject(new Water(x+8, y, id));
+				Handler.addObject(new Water(x+16, y, id));
+			}
 		}
 	}
 }

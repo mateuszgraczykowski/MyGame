@@ -42,6 +42,13 @@ public class Enemy extends Object implements ObjectInterface {
 
 	@Override
 	public void tick() {
+		collision();
+		if(helthOrc<=0) Handler.removeObject(this);
+		
+		animDown.runAnimation();
+	}
+	
+	private void collision() {
 		x+=velX*1;
 		y+=velY*1;
 		
@@ -50,17 +57,17 @@ public class Enemy extends Object implements ObjectInterface {
 		for(int i= 0; i<Handler.object.size();++i) {
 			ObjectInterface tempObject=Handler.object.get(i);
 			
-		
+			
 			if(tempObject.getId()==ID.Spell && tempObject.getBounds().intersects(getBounds())) {
 				helthOrc-=10;
 			}
 			
 			if(tempObject.getId()==ID.Player && getAgro().intersects(tempObject.getBounds())) {
-			
+				
 				diffX=x-tempObject.getOX();
 				diffY=y-tempObject.getOY();
 				distance=(float) Math.sqrt(diffX*diffX+diffY*diffY);
-			
+				
 				velX=(float) ((-1.0/distance)*diffX)*2;
 				velY=(float) ((-1.0/distance)*diffY)*2;
 			}if(tempObject.getId()==ID.Block) {
@@ -72,15 +79,16 @@ public class Enemy extends Object implements ObjectInterface {
 				}else if(choose==0) {
 					velX=(r.nextInt(2));
 					velY=(r.nextInt(2));
+				}else if(choose==1) {
+					velX=-(r.nextInt(2));
+					velY=-(r.nextInt(2));
 				}
 			}else if(tempObject.getId()==ID.Spell && getBounds().intersects(tempObject.getBounds())) {
 				helthOrc-=20;
 				Handler.removeObject(tempObject);
 			}
 		}
-		if(helthOrc<=0) Handler.removeObject(this);
 		
-		animDown.runAnimation();
 	}
 
 	@Override

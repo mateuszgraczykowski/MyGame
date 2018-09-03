@@ -23,7 +23,10 @@ public class FrozenTouchSpell extends Object implements ObjectInterface{
 
 	@Override
 	public void tick() {
-		
+		if(Mage.mana>0) {
+			Mage.mana-=0.005f;
+		}else
+			Handler.removeObject(this);
 	}
 
 	@Override

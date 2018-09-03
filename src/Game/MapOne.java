@@ -4,8 +4,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import Object.Tree;
+import Object.WaterThread;
 import Object.Mage;
-import Object.ObjectInterface;
 import Object.Enemy;
 
 public class MapOne extends Level {
@@ -20,8 +20,6 @@ public class MapOne extends Level {
 	
 	public MapOne() {
 		choose=random.nextInt(6);
-
-		
 		backgroundTextures[0]=backgroundLoader.divideImage(0, 0, 3000, 2500);
 	}
 	
@@ -42,19 +40,14 @@ public class MapOne extends Level {
 	
 		if(red == 255 && green==0 && blue==0) {
 			Handler.addObject(new Tree(xx*32, yy*32, ID.Block));
-			//Handler.addObject(new Tree(xx*40, yy*40, ID.Block));
 		}
 		if(blue == 255) {
 			Handler.addObject(new Mage(xx*35, yy*20, ID.Player));
 		}
 		if(green==255) {
-			Handler.addObject(new Enemy(xx*32, yy*32, ID.Enemy));
+			//Handler.addObject(new Enemy(xx*32, yy*32, ID.Enemy));
 		}
-		if(red==179 && green==42 && blue==214) {
-			
-			//Handler.addObject(new Water(xx*32, yy*32, ID.Water));		
-		}/*
-		if(red==162 || green==216) {
+		/*if(red==162 || green==216) {
 			Handler.addObject(new Troll(xx*32, yy*32, ID.Boss));
 		}*/
 		
@@ -62,11 +55,7 @@ public class MapOne extends Level {
 
 	@Override
 	public void removeObjectTextures(Handler handler) {
-		
-		for(int i= 0; i<Handler.object.size();++i) {
-			ObjectInterface tempObject=Handler.object.get(i);		
-			Handler.object.clear();
-			//Handler.removeObject(tempObject);			
-		}
+				Handler.object.clear();
+				WaterThread.waterIndex=0;
 	}
 }

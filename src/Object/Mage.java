@@ -5,9 +5,9 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import Game.Animation;
-import Game.Game;
 import Game.Handler;
 import Game.ID;
+import Game.Main;
 import Game.Status;
 import Game.TexturesLoader;
 
@@ -23,7 +23,7 @@ public class Mage extends Object implements ObjectInterface{
 	
 	public static float health=100;
 	public static float mana=100;
-	float  speedChange=(float) 1.5;
+	private float  speedChange=(float) 1.5;
 
 	public Mage(float x, float y, ID id) {
 		super(x, y, id);
@@ -63,7 +63,6 @@ public class Mage extends Object implements ObjectInterface{
 	public void tick() {
 		x+=velX;
 		y+=velY;
-		//float speedChange=(float) 1.5;
 		
 		collision();
 		
@@ -89,10 +88,9 @@ public class Mage extends Object implements ObjectInterface{
 	private void collision() {
 		speedChange=1.5f;
 		
-		
-		
 		for(int i= 0; i<Handler.object.size();++i) {
 			ObjectInterface tempObject=Handler.object.get(i);
+			
 			if(tempObject.getId()==ID.Block && getBounds().intersects(tempObject.getBounds())==true) {
 					x+=velX*-1;
 					y+=velY*-1;
@@ -100,7 +98,7 @@ public class Mage extends Object implements ObjectInterface{
 			else if(tempObject.getId()==ID.Enemy && getBounds().intersects(tempObject.getBounds())) {
 				if(health==0) {
 					Handler.removeObject(this);
-					Game.gameStatus=Status.Menu;
+					Main.gameStatus=Status.Menu;
 				}else {
 					health-=1;
 				}
